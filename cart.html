@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - trend4ever</title>
+    <link rel="stylesheet" href=style.css>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container-1">
+    <div class="navbar">
+       <div class="logo">
+        <a href="html.html"><img src="imges/logo1.jpg"width="300px"hight="200px"></a>
+       </div>
+       <nav>
+        <ul id="MenuItems" >
+            <li><a href="html.html">Home </a></li>
+            <li><a href="products.html">Products </a></li>
+            <li><a href="about.html">About </a></li>
+            <li><a href="contact.html">Contact </a></li>
+            <li><a href="account.html">Account </a></li>
+        </ul>
+       </nav>
+       <a href="cart.html"><img src="imges/shopping-bag (1).png"width="30px"height="30px"></a>
+       <img src="imges/menu-flat-color-outline-icon-free-png.webp" class ="menu-icon"width="30px"height="30px"onclick="menutoggle()">
+
+</div>
+ </div>
+ <!-------cart itens details-->
+<h1>Add to Cart Page</h1>
+<div class="cart-container">
+    <div class="product">
+        <img src="imges/red5.webp">
+        <h2>Red T-shirt</h2>
+        <p>Price: $9.99</p>
+        <button class="add-to-cart-btn" data-product-id="1">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="imges/blue3.webp">
+        <h2>White printed shirt</h2>
+        <p>Price: $11.99</p>
+        <button class="add-to-cart-btn" data-product-id="2">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="imges/jee3.webp" >
+        <h2>Black hoodies</h2>
+        <p>Price: $8.99</p>
+        <button class="add-to-cart-btn" data-product-id="3">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="imges/p11.webp">
+        <h2>T-shirts</h2>
+        <p>Price: $9.99</p>
+        <button class="add-to-cart-btn" data-product-id="4">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="imges/p13.webp">
+        <h2>Blue jeans</h2>
+        <p>Price: $10.99</p>
+        <button class="add-to-cart-btn" data-product-id="5">Add to Cart</button>
+    </div>
+</div>
+<div class="cart-summary">
+    <h2>Cart Summary</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="cart-total">$9.99</span></p>
+    
+ <button id="checkout-btn">Checkout</button>
+</div>
+
+<script> 
+// Array to store the cart items
+let cartItems = [];
+
+
+function addToCart(productId, productName, productPrice) {
+    // Check if the product is already in the cart
+    const existingItem = cartItems.find(item => item.id === productId);
+
+    if (existingItem) {
+    
+        existingItem.quantity++;
+    } else {
+        // Add a new item to the cart
+        cartItems.push({
+            id: productId,
+            name: productName,
+            price: productPrice,
+            quantity: 1
+        });
+    }
+
+    updateCartSummary();
+}
+
+// Function to update the cart summary
+function updateCartSummary() {
+    const cartItemsList = document.getElementById("cart-items");
+    cartItemsList.innerHTML = '';
+
+    let totalCost = 0;
+
+    cartItems.forEach(item => {
+        const itemPrice = item.price * item.quantity;
+        totalCost += itemPrice;
+
+        const listItem = document.createElement("li");
+        listItem.textContent = `${item.name} x ${item.quantity} - $${itemPrice.toFixed(2)}`;
+        cartItemsList.appendChild(listItem);
+    });
+
+    const cartTotal = document.getElementById("cart-total");
+    cartTotal.textContent = totalCost.toFixed(2);
+}
+
+// Function to handle the "Add to Cart" button click
+function handleAddToCartClick(event) {
+    if (event.target.classList.contains("add-to-cart-btn")) {
+        const productId = parseInt(event.target.getAttribute("data-product-id"));
+        const productName = event.target.previousElementSibling.previousElementSibling.textContent;
+        const productPrice = parseFloat(event.target.previousElementSibling.textContent.replace("$", ""));
+
+        addToCart(productId, productName, productPrice);
+    }
+}
+
+// "Checkout" button click
+function handleCheckoutClick() {
+    // checkout logic 
+
+    cartItems = [];
+    updateCartSummary();
+    alert("Checkout successful!");
+}
+
+// "Add to Cart" buttons and the "Checkout" button
+document.addEventListener("click", handleAddToCartClick);
+document.getElementById("checkout-btn").addEventListener("click", handleCheckoutClick);
+
+</script>
+
+<!----------footer---------->
+<div class="footer">
+   <div class="container-1">
+    <div class="row">
+        <div class="footer-col-1">
+            <h3>App for Download </h3>
+            <p>Download App for Android and ios mobile phone.</p>
+            <div class="app-logo">
+                <img src="imges/new-get-it-on-google-play-png-logo-20.png"width="120px"height="120px">
+                <img src="imges/apple.jpg">
+            </div>
+        </div>
+        <div class="footer-col-2">
+           <img src="imges/logo1.jpg"width="300px"hight="200px">
+            <p>Our Purpose is to sustainably make the plesure and benifits of sports accessible to the many.</p>
+        </div>
+        <div class="footer-col-3"
+            <h3>Useful links</h3>
+           <ul>
+            <li>Coupons</li>
+            <li>Blog Post</li>
+            <li>Return Policy</li>
+            <li>Join Affiliate</li>
+           </ul>
+        </div>
+        <div class="footer-col-4"
+            <h3>Follow us</h3>
+           <ul>
+            <li>Facebook</li>
+            <li>Twitter</li>
+            <li>Instagram</li>
+            <li>Youtube</li>
+           </ul>
+        </div>
+    </div>
+    <hr>
+    <p class="copyright">Copyright 2023</p>
+   </div>
+</div>
+</body>
+</html>
